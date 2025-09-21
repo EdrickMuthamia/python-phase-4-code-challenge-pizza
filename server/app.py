@@ -65,9 +65,7 @@ class RestaurantPizzas(Resource):
             db.session.add(restaurant_pizza)
             db.session.commit()
             return restaurant_pizza.to_dict(only=('id', 'price', 'pizza_id', 'restaurant_id', 'pizza.id', 'pizza.name', 'pizza.ingredients', 'restaurant.id', 'restaurant.name', 'restaurant.address')), 201
-        except ValueError as e:
-            return {'errors': [str(e)]}, 400
-        except Exception:
+        except (ValueError, Exception):
             return {'errors': ['validation errors']}, 400
 
 
